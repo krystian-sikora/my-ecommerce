@@ -17,6 +17,7 @@ public class Main {
             }
         }
 
+        System.out.println("----------------------------------------");
         names.stream()
                 .filter(name -> name.endsWith("a"))
                 .forEach(greeter::greet);
