@@ -1,7 +1,25 @@
 package pl.ksikora;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        List<String> names = Arrays.asList("Krystian", "Mikolaj", "Oliwia", "Jakub");
+        Greeter greeter = new Greeter();
+        greeter.greet("Krystian"); // -> Hello Krystian
+
+        List<String> ladies = new ArrayList<String>();
+        for (String name: names) {
+            if (name.endsWith("a")) {
+                ladies.add(name);
+            }
+        }
+
+        names.stream()
+                .filter(name -> name.endsWith("a"))
+                .forEach(greeter::greet);
+
     }
 }
