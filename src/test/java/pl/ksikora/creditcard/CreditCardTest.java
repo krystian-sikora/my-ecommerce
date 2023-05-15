@@ -1,8 +1,8 @@
 package pl.ksikora.creditcard;
 
 import org.junit.Test;
-import pl.ksikora.creditcard.exceptions.CantReassignCreditException;
-import pl.ksikora.creditcard.exceptions.CreditBelowLimitException;
+import pl.ksikora.creditcard.exceptions.CreditReassignmentException;
+import pl.ksikora.creditcard.exceptions.CreditBelowTresholdException;
 
 import java.math.BigDecimal;
 
@@ -16,8 +16,8 @@ public class CreditCardTest {
         CreditCard card1 = new CreditCard("1234-5678");
         CreditCard card2 = new CreditCard("1234-5678");
         // Act
-        card1.assignLimit(BigDecimal.valueOf(1000));
-        card2.assignLimit(BigDecimal.valueOf(1100));
+        card1.assignCredit(BigDecimal.valueOf(1000));
+        card2.assignCredit(BigDecimal.valueOf(1100));
         // Assert
         assertEquals(BigDecimal.valueOf(1000), card1.getCurrentBalance());
         assertEquals(BigDecimal.valueOf(1100), card2.getCurrentBalance());
@@ -27,21 +27,21 @@ public class CreditCardTest {
     public void itDeniesLimitsBelow100() {
         CreditCard card1 = new CreditCard("1234-5678");
         assertThrows(
-                CreditBelowLimitException.class,
-                () -> card1.assignLimit(BigDecimal.valueOf(99))
+                CreditBelowTresholdException.class,
+                () -> card1.assignCredit(BigDecimal.valueOf(99))
         );
-        assertDoesNotThrow(() -> card1.assignLimit(BigDecimal.valueOf(100)));
+        assertDoesNotThrow(() -> card1.assignCredit(BigDecimal.valueOf(100)));
     }
 
     @Test
     public void itCantAssignLimitTwice() {
         CreditCard card1 = new CreditCard("1234-5678");
 
-        card1.assignLimit(BigDecimal.valueOf(1000));
+        card1.assignCredit(BigDecimal.valueOf(1000));
 
         assertThrows(
-                CantReassignCreditException.class,
-                () -> card1.assignLimit(BigDecimal.valueOf(1100))
+                CreditReassignmentException.class,
+                () -> card1.assignCredit(BigDecimal.valueOf(1100))
         );
     }
 }
