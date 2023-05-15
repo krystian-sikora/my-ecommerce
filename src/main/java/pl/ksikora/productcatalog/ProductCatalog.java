@@ -7,25 +7,23 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductCatalog {
-    private Map<String, Product> products;
-    public ProductCatalog() {
-        this.products = new HashMap<>();
+    private ProductStorage productStorage;
+    public ProductCatalog(ProductStorage productStorage) {
+        this.productStorage = productStorage;
     }
     public List<Product> allProducts() {
-        return products.values()
-                .stream()
-                .collect(Collectors.toList());
+        return productStorage.allProducts();
     }
 
     public String addProduct(String name, String description) {
         Product newProduct = new Product(UUID.randomUUID(), name, description);
-        products.put(newProduct.getId(), newProduct);
+        productStorage.add(newProduct);
 
         return newProduct.getId();
     }
 
     public Product loadById(String productId) {
-        return products.get(productId);
+        return productStorage.loadById(productId);
     }
 
     public void changePrice(String productId, BigDecimal newPrice) {
@@ -54,9 +52,6 @@ public class ProductCatalog {
     }
 
     public List<Product> allPublishedProducts() {
-        return products.values()
-                .stream()
-                .filter(Product::getOnline)
-                .collect(Collectors.toList());
+        return productStorage.allPublishedProducts();
     }
 }
