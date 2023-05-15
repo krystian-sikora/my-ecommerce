@@ -14,6 +14,8 @@ public class App {
 
     @Bean
     ProductCatalog createNewProductCatalog() {
-        return new ProductCatalog(new HashMapProductStorage());
+        ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
+
+        return catalog;
     }
 }
