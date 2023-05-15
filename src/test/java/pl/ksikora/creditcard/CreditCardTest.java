@@ -1,6 +1,7 @@
 package pl.ksikora.creditcard;
 
 import org.junit.Test;
+import pl.ksikora.creditcard.exceptions.CantReassignCreditException;
 import pl.ksikora.creditcard.exceptions.CreditBelowLimitException;
 
 import java.math.BigDecimal;
@@ -30,5 +31,17 @@ public class CreditCardTest {
                 () -> card1.assignLimit(BigDecimal.valueOf(99))
         );
         assertDoesNotThrow(() -> card1.assignLimit(BigDecimal.valueOf(100)));
+    }
+
+    @Test
+    public void itCantAssignLimitTwice() {
+        CreditCard card1 = new CreditCard("1234-5678");
+
+        card1.assignLimit(BigDecimal.valueOf(1000));
+
+        assertThrows(
+                CantReassignCreditException.class,
+                () -> card1.assignLimit(BigDecimal.valueOf(1100))
+        );
     }
 }
