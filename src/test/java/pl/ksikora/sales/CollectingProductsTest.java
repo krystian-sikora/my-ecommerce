@@ -30,6 +30,6 @@ public class CollectingProductsTest {
     }
 
     private Sales thereIsSalesModule() {
-        return new Sales();
+        return new Sales(new CartStorage(), new ProductDetailsProvider());
     }
 }
