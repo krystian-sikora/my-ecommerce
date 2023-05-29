@@ -13,7 +13,7 @@ public class Product {
 
 
 
-    public Product(UUID uuid, String name, String description) {
+    public Product(String uuid, String name, String description) {
         this.uuid = uuid.toString();
         this.name = name;
         this.description = description;
