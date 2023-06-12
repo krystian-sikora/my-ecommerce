@@ -5,9 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.ksikora.productcatalog.HashMapProductStorage;
 import pl.ksikora.productcatalog.ProductCatalog;
-import pl.ksikora.sales.CartStorage;
-import pl.ksikora.sales.ProductDetailsProvider;
+import pl.ksikora.sales.cart.CartStorage;
 import pl.ksikora.sales.Sales;
+import pl.ksikora.sales.offering.OfferCalculator;
+import pl.ksikora.sales.productdetails.InMemoryProductDetailsProvider;
 
 import java.math.BigDecimal;
 
@@ -33,8 +34,10 @@ public class App {
 
         return catalog;
     }
+
     @Bean
     Sales createSales() {
-        return new Sales(new CartStorage(), new ProductDetailsProvider());
+        InMemoryProductDetailsProvider productDetails = new InMemoryProductDetailsProvider();
+        return new Sales(new CartStorage(), productDetails, new OfferCalculator(productDetails));
     }
 }

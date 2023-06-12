@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.ksikora.sales.offering.Offer;
 
 @RestController
 public class SalesController {
@@ -23,6 +24,10 @@ public class SalesController {
         sales.addToCart(getCurrentCustomer(), productId);
     }
 
+    @PostMapping("/api/accept-offer")
+    public void acceptOffer() {
+        sales.acceptOffer();
+    }
     private String getCurrentCustomer() {
         return "Krystian";
     }
