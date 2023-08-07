@@ -14,7 +14,7 @@ public class SalesController {
     private SalesController(Sales sales) {
         this.sales = sales;
     }
-    @GetMapping("/api/offer")
+    @GetMapping("/api/current-offer")
     public Offer getCurrentOffer() {
         return sales.getCurrentOffer(getCurrentCustomer());
     }

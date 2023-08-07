@@ -1,10 +1,13 @@
 package pl.ksikora.payu;
 
-import org.assertj.core.util.Arrays;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestTemplate;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
 
 public class PayUTest {
     @Test

@@ -1,7 +1,5 @@
 package pl.ksikora.payu;
 
-import pl.ksikora.productcatalog.Product;
-
 import java.util.List;
 
 public class OrderCreateRequest {
